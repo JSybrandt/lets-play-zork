@@ -20,6 +20,7 @@ def _add_to_history(command=None, prompt=None):
   _HISTORY.append(hist)
   if len(_HISTORY) > _MAX_HISTORY:
     _HISTORY = _HISTORY[-_MAX_HISTORY:]
+  print(_HISTORY[-1])
 
 def is_zork_running():
   global _ZORK_PROC
@@ -76,7 +77,7 @@ def send_command(command):
     _add_to_history(command=command)
     _add_new_prompt()
   if not is_zork_running():
-    print("The player has died!")
+    _add_to_history(prompt="You died! Restarting...")
     restart()
 
 _ZORK_PROC = None
