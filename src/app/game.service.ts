@@ -19,11 +19,18 @@ export class GameService {
 
   get_history(): Observable<HistItem[]> {
     let url = `${this.apiUrl}/history`
-    return this.http.get<HistItem[]>(url, this.httpOptions);
+    return this.http.get<HistItem[]>(url, this.httpOptions)
+      .pipe(catchError(this.handleError));
   }
 
   send_command(command: string): Observable<HistItem[]> {
     let url = `${this.apiUrl}/command`;
-    return this.http.post<HistItem[]>(url, {"command": command}, this.httpOptions);
+    return this.http.post<HistItem[]>(url, {"command": command}, this.httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+
+  private handleError(error: any): Observable<HistItem[]> {
+    console.log(error.message);
+    return of([{"error": error.message}]);
   }
 }

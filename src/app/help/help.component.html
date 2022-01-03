@@ -1,3 +1,4 @@
+<div class=vertpad></div>
 <h2>Zork Help</h2>
 
 <h3>Useful commands:</h3>
@@ -69,34 +70,34 @@
 </p>
 
 <ul>
-  <li><p><b>Actions:</b>
+  <li><b>Actions:</b>
     Among the more obvious of these, such as TAKE, PUT, DROP, etc.  Fairly
     general forms of these may be used, such as PICK UP, PUT DOWN,
-    etc.</p></li>
-  <li><p><b>Directions:</b>
+    etc.</li>
+  <li><b>Directions:</b>
     NORTH, SOUTH, UP, DOWN, etc. and their various abbreviations.  Other more
     obscure directions (LAND, CROSS) are appropriate in only certain
-    situations.</p></li>
-  <li><p><b>Objects:</b>
-    Most objects have names and can be referenced by them.</p></li>
-  <li><p><b>Adjectives:</b>
+    situations.</li>
+  <li><b>Objects:</b>
+    Most objects have names and can be referenced by them.</li>
+  <li><b>Adjectives:</b>
     Some adjectives are understood and required when there are two objects
     which can be referenced with the same 'name' (e.g., DOORs,
-    BUTTONs).</p></li>
-  <li><p><b>Prepositions:</b>
+    BUTTONs).</li>
+  <li><b>Prepositions:</b>
     It may be necessary in some cases to include prepositions, but the parser
     attempts to handle cases which aren't ambiguous without.  Thus 'GIVE CAR TO
     DEMON' will work, as will 'GIVE DEMON CAR'.  'GIVE CAR DEMON' probably
     won't do anything interesting.  When a preposition is used, it should be
-    appropriate;  'GIVE CAR WITH DEMON' won't parse.</p></li>
-  <li><p><b>Sentences:</b>
+    appropriate;  'GIVE CAR WITH DEMON' won't parse.</li>
+  <li><b>Sentences:</b>
     The parser understands a reasonable number of syntactic construc- tions.
     In particular, multiple commands (separated by commas) can be placed on the
-    same line.</p></li>
-  <li><p><b>Ambiguity:</b>
+    same line.</li>
+  <li><b>Ambiguity:</b>
     The parser tries to be clever about what to do in the case of actions which
     require objects that are not explicitly specified.  If there is only one
     possible object, the parser will assume that it should be used.  Otherwise,
     the parser will ask.  Most questions asked by the parser can be
-    answered.</p></li>
+    answered.</li>
 </ul>

@@ -1,15 +1,90 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+@import '~@angular/material/theming';
+@include mat-core();
+
+$app-primary: mat-palette($mat-indigo);
+$app-accent: mat-palette($mat-deep-purple);
+$app-warn: mat-palette($mat-red);
+$app-success: mat-palette($mat-light-green);
+
+$app-theme: mat-dark-theme($app-primary, $app-accent, $app-warn);
+
+@include angular-material-theme($app-theme);
+
+$typography: mat.define-typography-config(
+    $font-family: "Garamond, Baskerville, Baskerville Old Face, Hoefler Text, Times New Roman, serif",
+    $body-1: mat.define-typography-level(
+        16px, 24px, 400
+    ),
+    $body-2: mat.define-typography-level(
+        18px, 26px, 400
+    ),
+    $subheading-2: mat.define-typography-level(
+        20px, 20px, 400
+    )
+);
+@include mat.core($typography);
+
+
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+$max-page-width: 800px;
+$max-card-width: 60%;
 
 body {
-  max-width: 800px;
+  max-width: $max-page-width;
   margin: auto;
   width: 80%;
 }
 
 .vertpad {
   height: 20px;
+}
+
+
+mat-card {
+  width: fit-content;
+  max-width: $max-card-width;
+  word-wrap: break-word;
+}
+
+.command {
+    text-align: right;
+    margin-right:0;
+    margin-left:auto;
+    background: #{mat-color($app-accent)};
+}
+
+.prompt{
+    text-align: left;
+    margin-right:auto;
+    margin-left:0;
+    background: #{mat-color($app-primary)};
+}
+
+.error {
+    color: #{mat-color($app-warn)};
+    margin: auto;
+}
+
+#submit-form {
+    width: $max-card-width;
+    margin:auto;
+    mat-form-field{
+        width: 75%;
+    }
+    input {
+        width: 25%;
+    }
+    mat-progress-spinner{
+        width: 5%;
+        margin: auto;
+    }
+}
+
+h1 {
+    text-align: center;
+    margin: auto;
 }

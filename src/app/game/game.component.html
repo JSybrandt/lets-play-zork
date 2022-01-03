@@ -1,26 +1,27 @@
+<div class=vertpad></div>
 <div *ngFor="let item of history" #scrollBottom>
-  <div *ngIf="item.command">
-    <mat-card class=command>{{item.command}}</mat-card>
-  </div>
-  <div *ngIf="item.prompt">
-    <mat-card class=prompt>{{item.prompt}}</mat-card>
-  </div>
+    <mat-card [class]="getCardClass(item)">
+      <p class="mat-body-2">{{toString(item)}}</p>
+    </mat-card>
   <div class=vertpad></div>
 </div>
 <mat-divider></mat-divider>
 <div class=vertpad></div>
-<div>
-   <mat-form-field class="example-full-width" appearance="fill">
+
+<div id="submit-form">
+   <mat-form-field >
      <mat-label>Send a Command</mat-label>
-  <input matInput id="command" [(ngModel)]="command" (keyup.enter)="submit()" >
+     <input matInput
+       [(ngModel)]="command"
+       (keyup.enter)="submit()">
    </mat-form-field>
-  <button mat-flat-button color="primary" (click)="submit()" [disabled]="!commandIsValid()">Submit</button>
-</div>
-
-<div *ngIf="waiting">
+  <button mat-flat-button
+    color="primary"
+    (click)="submit()"
+    [disabled]="!commandIsValid()">Submit</button>
   <mat-progress-spinner
+    *ngIf="waiting"
     color="accent"
-    mode="indeterminate">
-  </mat-progress-spinner>
-</div>
+    mode="indeterminate"></mat-progress-spinner>
 
+</div>
