@@ -31,18 +31,21 @@ def _add_new_prompt():
   def is_prompt_complete():
     if len(buffer) >= 1 and buffer[-1] == "":
       # Error case. Pipe closed.
-      return True
+      return False
     if len(buffer) >= 2:
       return buffer[-2:] == ["\n", ">"]
     return False
   while is_zork_running() and not is_prompt_complete():
     buffer.append(_ZORK_PROC.stdout.read(1))
-  # Remove the > from the prompt
-  _add_to_history(prompt= "".join(buffer[:-2]))
+  # Remove the > from the prompt.
+  if is_prompt_complete():
+    buffer = buffer[:-2]
+  _add_to_history(prompt= "".join(buffer))
 
 def restart():
   global _ZORK_PROC, _HISTORY
   with _LOCK:
+    print("Restarting Zork.")
     try:
       if _ZORK_PROC is not None:
         _ZORK_PROC.kill()
@@ -55,15 +58,13 @@ def restart():
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
         universal_newlines=True)
-      _HISTORY = []
+      #_HISTORY = []
       _add_new_prompt()
-
-_ZORK_PROC = None
-restart()
-
 
 def send_command(command):
   global _ZORK_PROC
+  if len(command) > 200:
+    raise ValueError("Command too long.")
   with _LOCK:
     if not is_zork_running():
       raise ValueError("Attempted to send_command while zork wasn't running.")
@@ -74,6 +75,9 @@ def send_command(command):
     _ZORK_PROC.stdin.flush()
     _add_to_history(command=command)
     _add_new_prompt()
+  if not is_zork_running():
+    print("The player has died!")
+    restart()
 
-
-
+_ZORK_PROC = None
+restart()
