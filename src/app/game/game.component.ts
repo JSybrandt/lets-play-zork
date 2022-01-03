@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { interval} from 'rxjs';
 import { HistItem } from '../histitem';
 import { GameService } from '../game.service';
 
@@ -16,12 +17,18 @@ export class GameComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.gameService.get_history().subscribe(hist=>this.history=hist);
+    this.updateHistory();
+    interval(2000).subscribe(()=>this.updateHistory());
   }
 
   submit(): void {
     this.gameService.send_command(this.command).subscribe(hist=>this.history=hist);
     this.command = "";
   }
+
+  updateHistory(): void {
+    this.gameService.get_history().subscribe(hist=>this.history=hist);
+  }
+
 
 }
