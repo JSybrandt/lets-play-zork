@@ -8,7 +8,7 @@ import { HistItem } from './histitem';
   providedIn: 'root'
 })
 export class GameService {
-  private apiUrl = "http://localhost:5000";
+  private apiUrl = "https://lets-play-zork-api.sybrandt.com:8080";
   private httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
