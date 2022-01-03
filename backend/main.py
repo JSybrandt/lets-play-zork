@@ -26,7 +26,7 @@ def send_command():
   if not zork_controller.is_zork_running():
     zork_controller.restart()
     raise ValueError("Zork is not running attempting to restart.")
-  zork_controller.send_command()
+  zork_controller.send_command(request_json["command"])
   return jsonify(zork_controller.get_history())
 
 @app.route("/history", methods=["GET"])
@@ -39,10 +39,10 @@ def get_ssl_context():
   fullchain_path=Path('/etc/letsencrypt/live/lets-play-zork-api.sybrandt.com/fullchain.pem')
   privkey_path=Path('/etc/letsencrypt/live/lets-play-zork-api.sybrandt.com/privkey.pem')
   if fullchain_path.is_file() and privkey_path.is_file():
-    return (str(fullchain_path), str(privkey_path))
+    return dict(ssl_context=(str(fullchain_path), str(privkey_path)), port=8080)
   print("WARNING: Failed to get ssl cert. This only makes.")
-  return None
+  return dict(ssl_context=None, port=None)
 
 
 if __name__ == "__main__":
-  app.run(threaded=True, port=8080, host="0.0.0.0", ssl_context=get_ssl_context())
+  app.run(threaded=True, host="0.0.0.0", **get_ssl_context())
