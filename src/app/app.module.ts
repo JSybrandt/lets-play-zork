@@ -15,11 +15,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatCardModule} from '@angular/material/card';
 import {MatTabsModule} from '@angular/material/tabs';
 import {ScrollingModule} from '@angular/cdk/scrolling';
-
-
-
-
-
+import {ScrollingModule as ExperimentalScrollingModule} from '@angular/cdk-experimental/scrolling';
 
 
 @NgModule({
@@ -40,6 +36,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     MatCardModule,
     MatTabsModule,
     ScrollingModule,
+    ExperimentalScrollingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

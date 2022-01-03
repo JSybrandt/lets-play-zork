@@ -1,7 +1,8 @@
-<div class=vertpad></div>
-<cdk-virtual-scroll-viewport #viewport [itemSize]=20>
-  <div *cdkVirtualFor="let item of history">
-      <mat-card #card [class]="getCardClass(item)">
+<cdk-virtual-scroll-viewport #viewport autosize>
+  <div *cdkVirtualFor="let item of history; let index = index; let count = count">
+      <mat-card
+        #card [class]="getCardClass(item)"
+        [style.opacity]="index / (count + 1)">
         <p class="mat-body-2">{{histItemToString(item)}}</p>
       </mat-card>
     <div class=vertpad></div>
@@ -26,5 +27,4 @@
     *ngIf="waiting"
     color="accent"
     mode="indeterminate"></mat-progress-spinner>
-
 </div>

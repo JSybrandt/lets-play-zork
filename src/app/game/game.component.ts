@@ -1,6 +1,6 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ViewChildren, ElementRef, QueryList } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, ViewChild, ViewChildren, ElementRef, QueryList } from '@angular/core';
 
-import { interval} from 'rxjs';
+import { interval, timer } from 'rxjs';
 import { HistItem, histItemsEqual } from '../histitem';
 import { GameService } from '../game.service';
 
@@ -13,7 +13,7 @@ import { MatCard } from '@angular/material/card';
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss']
 })
-export class GameComponent implements OnInit, AfterViewInit {
+export class GameComponent implements OnInit, AfterViewChecked {
   command: string = "";
   history: HistItem[] = [];
   waiting: boolean = false;
@@ -24,14 +24,13 @@ export class GameComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.gameService.get_history().subscribe(h => {
-      this.history = h;
+      this.maybeUpdateHistory(h);
     });
-    interval(3000).subscribe(()=>{
+    interval(2000).subscribe(()=>{
       this.gameService.get_history().subscribe(h => this.maybeUpdateHistory(h));
     });
   }
-  ngAfterViewInit(): void {
-  }
+  ngAfterViewChecked(): void {}
 
   submit(): void {
     if(!this.commandIsValid()) return;
@@ -64,7 +63,7 @@ export class GameComponent implements OnInit, AfterViewInit {
 
   @ViewChild("viewport") private viewportContainer!: CdkVirtualScrollViewport;
   scrollToBottom(): void {
-    this.viewportContainer.scrollToOffset(this.viewportContainer.measureRenderedContentSize(), "smooth");
+    this.viewportContainer.scrollTo({bottom: 0, behavior: "smooth"});
   }
 
   isCandidateDifferent(candidate:HistItem[]): boolean {
