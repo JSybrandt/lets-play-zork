@@ -1,6 +1,7 @@
 <h1>Lets Play Zork!</h1>
-<nav>
-    <a routerLink="/game">Play</a>
-    <a routerLink="/help">Help</a>
-</nav>
-<router-outlet></router-outlet>
+<div class=vertpad></div>
+<mat-tab-group>
+  <mat-tab label="Game"><app-game></app-game></mat-tab>
+  <mat-tab label="Help"><app-help></app-help></mat-tab>
+</mat-tab-group>
+
