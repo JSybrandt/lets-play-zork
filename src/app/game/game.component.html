@@ -1,10 +1,13 @@
 <div class=vertpad></div>
-<div *ngFor="let item of history" #scrollBottom>
-    <mat-card [class]="getCardClass(item)">
-      <p class="mat-body-2">{{toString(item)}}</p>
-    </mat-card>
-  <div class=vertpad></div>
-</div>
+<cdk-virtual-scroll-viewport #viewport [itemSize]=20>
+  <div *cdkVirtualFor="let item of history">
+      <mat-card #card [class]="getCardClass(item)">
+        <p class="mat-body-2">{{histItemToString(item)}}</p>
+      </mat-card>
+    <div class=vertpad></div>
+  </div>
+</cdk-virtual-scroll-viewport>
+
 <mat-divider></mat-divider>
 <div class=vertpad></div>
 

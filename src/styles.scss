@@ -31,7 +31,7 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 $max-page-width: 800px;
-$max-card-width: 60%;
+$max-card-width: 80%;
 
 body {
   max-width: $max-page-width;
@@ -79,7 +79,6 @@ mat-card {
         width: 25%;
     }
     mat-progress-spinner{
-        width: 5%;
         margin: auto;
     }
 }
@@ -87,4 +86,15 @@ mat-card {
 h1 {
     text-align: center;
     margin: auto;
+}
+
+cdk-virtual-scroll-viewport{
+    height: 500px;
+    /* Hide vertical scrollbar */
+    &::-webkit-scrollbar{
+        display: none;
+    }
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    scroll-behavior: smooth;
 }

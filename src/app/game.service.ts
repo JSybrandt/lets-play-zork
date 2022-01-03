@@ -29,8 +29,8 @@ export class GameService {
       .pipe(catchError(this.handleError));
   }
 
-  private handleError(error: any): Observable<HistItem[]> {
-    console.log(error.message);
-    return of([{"error": error.message}]);
+  private handleError(response: any): Observable<HistItem[]> {
+    console.log(response.message);
+    return of([response.error]);
   }
 }

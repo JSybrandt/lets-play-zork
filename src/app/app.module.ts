@@ -14,7 +14,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatCardModule} from '@angular/material/card';
 import {MatTabsModule} from '@angular/material/tabs';
-
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 
 
@@ -39,6 +39,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatProgressSpinnerModule,
     MatCardModule,
     MatTabsModule,
+    ScrollingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
