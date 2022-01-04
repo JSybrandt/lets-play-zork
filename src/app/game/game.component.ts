@@ -4,7 +4,6 @@ import { interval, timer } from 'rxjs';
 import { HistItem, histItemsEqual } from '../histitem';
 import { GameService } from '../game.service';
 
-import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { MatCard } from '@angular/material/card';
 
 
@@ -34,7 +33,6 @@ export class GameComponent implements OnInit, AfterViewChecked {
 
   submit(): void {
     if(!this.commandIsValid()) return;
-    this.scrollToBottom();
     this.gameService.send_command(this.command).subscribe(h => {
       this.maybeUpdateHistory(h);
       this.waiting = false;
@@ -61,11 +59,6 @@ export class GameComponent implements OnInit, AfterViewChecked {
     return "Invalid Item"
   }
 
-  @ViewChild("viewport") private viewportContainer!: CdkVirtualScrollViewport;
-  scrollToBottom(): void {
-    this.viewportContainer.scrollTo({bottom: 0, behavior: "smooth"});
-  }
-
   isCandidateDifferent(candidate:HistItem[]): boolean {
     if(this.history.length!==candidate.length) return true;
     return !this.history.every((h:HistItem, idx:number) => histItemsEqual(h, candidate[idx]));
@@ -74,6 +67,5 @@ export class GameComponent implements OnInit, AfterViewChecked {
   maybeUpdateHistory(candidate: HistItem[]): void {
     if(!this.isCandidateDifferent(candidate)) return;
     this.history = candidate;
-    this.scrollToBottom();
   }
 }

@@ -33,9 +33,15 @@ class ZorkControllerTest(unittest.TestCase):
     with self.assertRaises(ValueError):
       zork_controller.send_command("q")
 
+    with self.assertRaises(ValueError):
+      zork_controller.send_command("Q")
+
   def test_quit_not_allowed(self):
     with self.assertRaises(ValueError):
       zork_controller.send_command("quit")
+
+    with self.assertRaises(ValueError):
+      zork_controller.send_command("Quit")
 
 
   def test_threadsage(self):

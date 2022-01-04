@@ -70,7 +70,7 @@ def send_command(command):
     if not is_zork_running():
       raise ValueError("Attempted to send_command while zork wasn't running.")
     command = command.strip()
-    if command in ["q", "quit"]:
+    if command.lower() in ["q", "quit"]:
       raise ValueError("You're not allowed to quit the game.")
     _ZORK_PROC.stdin.write(command + "\n")
     _ZORK_PROC.stdin.flush()
